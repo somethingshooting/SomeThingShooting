@@ -1,2 +1,7 @@
-public class{
+public class Player{
+
+public void Start(){
+
+}
+
 }
