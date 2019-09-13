@@ -16,16 +16,16 @@ public class TitleSceneManager : MonoBehaviour
         if (GameObject.FindWithTag("GameManager") == null) { Instantiate(_GameManagerObject); }
         _GameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
-        //Spaceキーが押されたときにLoadMainSceneを走らせる
+        //Spaceキーが押されたときにLoadStageSelectSceneを走らせる
         this.UpdateAsObservable()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
-            .Subscribe(_ => LoadMainScene());
+            .Subscribe(_ => LoadStageSelectScene());
 
     }
 
-    //メインシーンに変移する
-    private void LoadMainScene()
+    //ステージセレクトシーンに変移する
+    private void LoadStageSelectScene()
     {
-        _GameManager.ChangeScene(SceneType.Main);
+        _GameManager.ChangeScene(SceneType.StageSelect);
     }
 }

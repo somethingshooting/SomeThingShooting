@@ -34,8 +34,11 @@ public class GameManager : MonoBehaviour
             case SceneType.Title:
                 sceneName = "Title";
                 break;
-            case SceneType.Main:
-                sceneName = "Main";
+            case SceneType.StageSelect:
+                sceneName = "StageSelect";
+                break;
+            case SceneType.Main_1:
+                sceneName = "Main_1";
                 break;
             case SceneType.Result:
                 sceneName = "Result";

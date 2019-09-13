@@ -2,7 +2,7 @@
 public enum SceneType
 {
     Title,
-    Main,
+    StageSelect,
+    Main_1,
     Result,
-
 }
