@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
+/* Playerのパラメータ : HP ATK MoveSpeed
+ * 
+ * 
+ */
 public class Player : Character
-{    
+{
     // ----- 変数 ----- //
-    public string RunningSkillName { get; protected set; }
 
     // ----- Subject ----- //
     public Subject<Unit> SkillStart;

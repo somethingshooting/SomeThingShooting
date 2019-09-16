@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class BuffData
+public abstract class SkillBase : MonoBehaviour
 {
-    public bool Poison = false;
+
 }

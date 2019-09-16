@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : Character
+public abstract class EnemyBase : Character
 {
     // ----- 変数 ----- //
     [SerializeField] protected RuntimeAnimatorController Animator;

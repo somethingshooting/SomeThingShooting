@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Zako : Enemy
+public class Enemy_Zako : EnemyBase
 {
     // ----- 変数 ----- //
 

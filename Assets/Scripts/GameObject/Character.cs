@@ -5,14 +5,17 @@ using UnityEngine;
 using UniRx;
 
 public abstract class Character : AnyObject
-{    
+{
     // ----- 変数 ----- //
-    public int NowHealth { get; protected set; }
-    protected int MaxHealth;
-    public float MoveSpeed;
-    public BuffData buffData;
-
-    // ----- Subject ----- //
+    protected ReactiveProperty<int> _NowHealth = new ReactiveProperty<int>();
+    public IReadOnlyReactiveProperty<int> NowHealth => _NowHealth;
+    protected ReactiveProperty<int> _MaxHealth = new ReactiveProperty<int>();
+    public IReadOnlyReactiveProperty<int> MaxHealth => _MaxHealth;
+    protected ReactiveProperty<float> _MoveSpeed = new ReactiveProperty<float>();
+    public IReadOnlyReactiveProperty<float> MoveSpeed => _MoveSpeed;
+    protected ReactiveProperty<BuffData> _BuffData = new ReactiveProperty<BuffData>();
+    public IReadOnlyReactiveProperty<BuffData> BuffData => _BuffData;
+    public string RunningSkillName { get; protected set; } = "None";
     
     // ----- 関数 ----- //
     protected override void Start()
@@ -27,7 +30,7 @@ public abstract class Character : AnyObject
 
     }
 
-    protected virtual void Skill()
+    protected virtual void PlaySkill(SkillBase skillBase)
     {
 
     }
