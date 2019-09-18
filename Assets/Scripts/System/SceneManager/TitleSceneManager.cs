@@ -20,7 +20,7 @@ public class TitleSceneManager : MonoBehaviour
         this.UpdateAsObservable()
             .Where(_ => Input.GetKeyDown(KeyCode.Space))
             .Subscribe(_ => LoadStageSelectScene());
-
+        
     }
 
     //ステージセレクトシーンに変移する

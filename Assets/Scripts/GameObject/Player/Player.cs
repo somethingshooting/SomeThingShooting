@@ -22,13 +22,12 @@ public class Player : Character
 
     }
 
-    protected override void Update()
+    protected void PlayMotion()
     {
-        base.Update();
 
     }
 
-    protected void PlayMotion()
+    protected override void Init()
     {
 
     }

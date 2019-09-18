@@ -24,12 +24,6 @@ public abstract class Character : AnyObject
 
     }
 
-    protected override void Update()
-    {
-        base.Update();
-
-    }
-
     protected virtual void PlaySkill(SkillBase skillBase)
     {
 

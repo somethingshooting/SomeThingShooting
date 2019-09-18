@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Zako : EnemyBase
 {
+
     // ----- 変数 ----- //
 
     // ----- Subject ----- //
@@ -15,9 +16,9 @@ public class Enemy_Zako : EnemyBase
 
     }
 
-    protected override void Update()
+    protected override void Init()
     {
-        base.Update();
 
     }
+
 }

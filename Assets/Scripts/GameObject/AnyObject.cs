@@ -18,28 +18,27 @@ public abstract class AnyObject : MonoBehaviour
     public IReadOnlyReactiveProperty<bool> IsAlive => _IsAlive;
 
     // ----- Subject ----- //
-    protected Subject<Unit> _HitAttack = new Subject<Unit>();
-    public IObservable<Unit> HitAttack => _HitAttack;
-    protected Subject<AttackData> _HitDamage = new Subject<AttackData>();
-    public IObservable<AttackData> HitDamage => _HitDamage;
-    private Subject<Unit> _ThroughAttack = new Subject<Unit>();
-    public IObservable<Unit> ThroughAttack => _ThroughAttack;
+    //攻撃に当たったとき
+    protected Subject<TeamType> _HitAttack = new Subject<TeamType>();
+    public IObservable<TeamType> HitAttack => _HitAttack;
+    //攻撃が当たったとき
+    protected Subject<TeamType> _HitDamage = new Subject<TeamType>();
+    public IObservable<TeamType> HitDamage => _HitDamage;
+    private Subject<AttackData> _ThroughAttack = new Subject<AttackData>();
+    public IObservable<AttackData> ThroughAttack => _ThroughAttack;
     protected Subject<AttackData> _ThroughDamage = new Subject<AttackData>();
     public IObservable<AttackData> ThroughDamage => _ThroughDamage;
 
-    protected Subject<Unit> _OnKilled = new Subject<Unit>();
-    public IObservable<Unit> OnKilled => _OnKilled;
+    protected Subject<TeamType> _OnKilled = new Subject<TeamType>();
+    public IObservable<TeamType> OnKilled => _OnKilled;
     protected Subject<Unit> _OnDied = new Subject<Unit>();
     public IObservable<Unit> OnDied => _OnDied;
 
     // ----- 関数 ----- //
     protected virtual void Start()
     {
-        
+        Init();
     }
 
-    protected virtual void Update()
-    {
-        
-    }
+    protected abstract void Init();
 }

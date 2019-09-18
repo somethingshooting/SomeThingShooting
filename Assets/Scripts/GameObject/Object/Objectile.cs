@@ -14,10 +14,4 @@ public abstract class Objectile : AnyObject
         base.Start();
 
     }
-
-    protected override void Update()
-    {
-        base.Update();
-
-    }
 }

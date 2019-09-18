@@ -16,10 +16,4 @@ public abstract class EnemyBase : Character
         base.Start();
 
     }
-
-    protected override void Update()
-    {
-        base.Update();
-
-    }
 }
