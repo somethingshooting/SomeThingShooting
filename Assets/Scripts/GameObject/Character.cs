@@ -15,7 +15,10 @@ public abstract class Character : AnyObject
     public IReadOnlyReactiveProperty<float> MoveSpeed => _MoveSpeed;
     protected ReactiveProperty<BuffData> _BuffData = new ReactiveProperty<BuffData>();
     public IReadOnlyReactiveProperty<BuffData> BuffData => _BuffData;
-    public string RunningSkillName { get; protected set; } = "None";
+    protected ReactiveProperty<SkillBase> _RunningSkill = new ReactiveProperty<SkillBase>();
+    public IReadOnlyReactiveProperty<SkillBase> RunningSkill => _RunningSkill;
+    //実行中のスキルの名前
+    public string RunningSkillName { get => _RunningSkill.Value.SkillName; }
     
     // ----- 関数 ----- //
     protected override void Start()
@@ -24,7 +27,7 @@ public abstract class Character : AnyObject
 
     }
 
-    protected virtual void PlaySkill(SkillBase skillBase)
+    public virtual void PlaySkill(string SkillName)
     {
 
     }

@@ -20,19 +20,19 @@ public abstract class AnyObject : MonoBehaviour
     // ----- Subject ----- //
     //攻撃に当たったとき
     protected Subject<TeamType> _HitAttack = new Subject<TeamType>();
-    public IObservable<TeamType> HitAttack => _HitAttack;
+    public IObservable<TeamType> HitAttackSubject => _HitAttack;
     //攻撃が当たったとき
     protected Subject<TeamType> _HitDamage = new Subject<TeamType>();
-    public IObservable<TeamType> HitDamage => _HitDamage;
+    public IObservable<TeamType> HitDamageSubject => _HitDamage;
     private Subject<AttackData> _ThroughAttack = new Subject<AttackData>();
-    public IObservable<AttackData> ThroughAttack => _ThroughAttack;
+    public IObservable<AttackData> ThroughAttackSubject => _ThroughAttack;
     protected Subject<AttackData> _ThroughDamage = new Subject<AttackData>();
-    public IObservable<AttackData> ThroughDamage => _ThroughDamage;
+    public IObservable<AttackData> ThroughDamageSubject => _ThroughDamage;
 
     protected Subject<TeamType> _OnKilled = new Subject<TeamType>();
-    public IObservable<TeamType> OnKilled => _OnKilled;
+    public IObservable<TeamType> OnKilledSubject => _OnKilled;
     protected Subject<Unit> _OnDied = new Subject<Unit>();
-    public IObservable<Unit> OnDied => _OnDied;
+    public IObservable<Unit> OnDiedSubject => _OnDied;
 
     // ----- 関数 ----- //
     protected virtual void Start()

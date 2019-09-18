@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class SkillBase : MonoBehaviour
 {
+    public abstract string SkillName { get; protected set; }
+
     /// <summary>
     /// 割り込みが可能か
     /// </summary>
