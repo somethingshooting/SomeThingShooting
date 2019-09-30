@@ -11,31 +11,18 @@ using UniRx;
 public class PlayerCore : Character
 {
     // ----- 変数 ----- //
-    protected GameManager _GameManager = null;
 
-
-    // ----- Subject ----- //
 
     // ----- 関数 ----- //
     protected override void Init()
     {
-        OnKill.Subscribe(_ => KillEnemy());
-        OnDied.Subscribe(_ => Dead());
-    }
-
-    /// <summary>
-    /// スキルを実行する
-    /// </summary>
-    /// <param name="SkillName">実行するスキルの名前</param>
-    protected void PlayMotion(string SkillName)
-    {
-
+        
     }
 
     /// <summary>
     /// Playerが敵を倒した時の処理
     /// </summary>
-    protected void KillEnemy()
+    protected override void OnKill()
     {
 
     }
@@ -43,7 +30,7 @@ public class PlayerCore : Character
     /// <summary>
     /// Playerが死んだときの処理
     /// </summary>
-    protected void Dead()
+    protected override void OnDied()
     {
 
     }

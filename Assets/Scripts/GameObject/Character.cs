@@ -11,10 +11,8 @@ public abstract class Character : AnyObject
     public IReadOnlyReactiveProperty<int> NowHealth => _NowHealth;
     protected ReactiveProperty<int> _MaxHealth = new ReactiveProperty<int>();
     public IReadOnlyReactiveProperty<int> MaxHealth => _MaxHealth;
-    protected ReactiveProperty<float> _MoveSpeed = new ReactiveProperty<float>();
-    public IReadOnlyReactiveProperty<float> MoveSpeed => _MoveSpeed;
-    protected ReactiveProperty<BuffData> _BuffData = new ReactiveProperty<BuffData>();
-    public IReadOnlyReactiveProperty<BuffData> BuffData => _BuffData;
+    protected ReactiveProperty<List<BuffData>> _BuffData = new ReactiveProperty<List<BuffData>>();
+    public IReadOnlyReactiveProperty<List<BuffData>> BuffData => _BuffData;
     protected ReactiveProperty<string> _RunningAction = new ReactiveProperty<string>();
     public IReadOnlyReactiveProperty<string> RunningAction => _RunningAction;
 
@@ -23,6 +21,7 @@ public abstract class Character : AnyObject
     // ----- 関数 ----- //
     protected override void Start()
     {
+
         base.Start();
 
     }

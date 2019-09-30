@@ -6,9 +6,7 @@ using UnityEngine;
 public abstract class EnemyBase : Character
 {
     // ----- 変数 ----- //
-    [SerializeField] protected RuntimeAnimatorController Animator;
 
-    // ----- Subject ----- //
 
     // ----- 関数 ----- //
     protected override void Start()

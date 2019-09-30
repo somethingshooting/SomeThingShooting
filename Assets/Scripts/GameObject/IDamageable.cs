@@ -6,7 +6,7 @@ using UniRx;
 
 public interface IDamageable
 {
-    IObservable<AnyObject> HadPhysicsHit { get; }
-    IObservable<AnyObject> HadDamageHit  { get; }
-    IObservable<AnyObject> OnDied        { get; }
+    IObservable<AnyObject> Sub_HadPhysicsHit { get; }
+    IObservable<AnyObject> Sub_HadDamageHit  { get; }
+    IObservable<AnyObject> Sub_OnDied        { get; }
 }

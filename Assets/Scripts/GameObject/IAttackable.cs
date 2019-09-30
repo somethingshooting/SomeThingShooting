@@ -6,8 +6,8 @@ using UniRx;
 
 public interface IAttackable
 {
-    IObservable<AnyObject> SendPhysicsHit { get; }
-    IObservable<AnyObject> SendDamageHit { get; }
-    IObservable<AnyObject> OnKill { get; }
+    IObservable<AnyObject> Sub_SendPhysicsHit { get; }
+    IObservable<AnyObject> Sub_SendDamageHit { get; }
+    IObservable<AnyObject> Sub_OnKill { get; }
 
 }
