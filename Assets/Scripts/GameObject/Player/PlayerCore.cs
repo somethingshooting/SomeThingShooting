@@ -19,7 +19,8 @@ public class PlayerCore : Character
     // ----- 関数 ----- //
     protected override void Init()
     {
-
+        OnKill.Subscribe(_ => KillEnemy());
+        OnDied.Subscribe(_ => Dead());
     }
 
     /// <summary>
@@ -34,7 +35,7 @@ public class PlayerCore : Character
     /// <summary>
     /// Playerが敵を倒した時の処理
     /// </summary>
-    protected void OnKilled()
+    protected void KillEnemy()
     {
 
     }
@@ -42,7 +43,7 @@ public class PlayerCore : Character
     /// <summary>
     /// Playerが死んだときの処理
     /// </summary>
-    protected void OnDied()
+    protected void Dead()
     {
 
     }

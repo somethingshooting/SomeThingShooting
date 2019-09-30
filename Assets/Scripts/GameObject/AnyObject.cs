@@ -7,32 +7,31 @@ using UniRx;
 /// <summary>
 /// 
 /// </summary>
-public abstract class AnyObject : MonoBehaviour
+public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
 {
-    // ----- 変数 ----- //
-    protected bool Attackable;
-    protected bool Damageable;
+    protected BoolReactiveProperty _Attackable = new BoolReactiveProperty(true);
+    public IReadOnlyReactiveProperty<bool> Attackable => _Attackable;
+    protected BoolReactiveProperty _Damageable = new BoolReactiveProperty(true);
+    public IReadOnlyReactiveProperty<bool> Damageable => _Damageable;
+
     public TeamType TeamType { get; protected set; }
 
     protected ReactiveProperty<bool> _IsAlive = new ReactiveProperty<bool>();
     public IReadOnlyReactiveProperty<bool> IsAlive => _IsAlive;
 
-    // ----- Subject ----- //
-    //攻撃に当たったとき
-    protected Subject<TeamType> _HitAttack = new Subject<TeamType>();
-    public IObservable<TeamType> HitAttackSubject => _HitAttack;
-    //攻撃が当たったとき
-    protected Subject<TeamType> _HitDamage = new Subject<TeamType>();
-    public IObservable<TeamType> HitDamageSubject => _HitDamage;
-    private Subject<AttackData> _ThroughAttack = new Subject<AttackData>();
-    public IObservable<AttackData> ThroughAttackSubject => _ThroughAttack;
-    protected Subject<AttackData> _ThroughDamage = new Subject<AttackData>();
-    public IObservable<AttackData> ThroughDamageSubject => _ThroughDamage;
+    protected Subject<AnyObject> _SendPhysicsHit = new Subject<AnyObject>();
+    public IObservable<AnyObject> SendPhysicsHit => _SendPhysicsHit;
+    protected Subject<AnyObject> _SendDamageHit = new Subject<AnyObject>();
+    public IObservable<AnyObject> SendDamageHit => _SendDamageHit;
+    protected Subject<AnyObject> _OnKill = new Subject<AnyObject>();
+    public IObservable<AnyObject> OnKill => _OnKill;
 
-    protected Subject<TeamType> _OnKilled = new Subject<TeamType>();
-    public IObservable<TeamType> OnKilledSubject => _OnKilled;
-    protected Subject<Unit> _OnDied = new Subject<Unit>();
-    public IObservable<Unit> OnDiedSubject => _OnDied;
+    protected Subject<AnyObject> _HadPhysicsHit = new Subject<AnyObject>();
+    public IObservable<AnyObject> HadPhysicsHit => _HadPhysicsHit;
+    protected Subject<AnyObject> _HadDamageHit = new Subject<AnyObject>();
+    public IObservable<AnyObject> HadDamageHit => _HadDamageHit;
+    protected Subject<AnyObject> _OnDied = new Subject<AnyObject>();
+    public IObservable<AnyObject> OnDied => _OnDied;
 
     // ----- 関数 ----- //
     protected virtual void Start()
@@ -41,4 +40,20 @@ public abstract class AnyObject : MonoBehaviour
     }
 
     protected abstract void Init();
+
+    //接触判定
+    protected void OnTriggerEnter(Collider other)
+    {
+        AnyObject obj = other.GetComponent<AnyObject>();
+        //Had系の判定
+        if (TeamType != obj.TeamType && Damageable.Value && obj.Attackable.Value)
+        {
+            _HadPhysicsHit.OnNext(obj);
+        }
+        //Send系の判定
+        if (TeamType != obj.TeamType && Attackable.Value && obj.Damageable.Value)
+        {
+            _SendPhysicsHit.OnNext(obj);
+        }
+    }
 }
