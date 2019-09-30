@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackData : MonoBehaviour
+[CreateAssetMenu(fileName = "AttackDataName",menuName = "SomeShingShooting/AttackData")]
+public class AttackData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int DamageValue = 1;
+    public List<BuffData> BuffDatas = new List<BuffData>();
 }

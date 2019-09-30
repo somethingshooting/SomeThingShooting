@@ -22,7 +22,7 @@ public class PlayerCore : Character
     /// <summary>
     /// Playerが敵を倒した時の処理
     /// </summary>
-    protected override void OnKill()
+    protected override void OnKill(AnyObject killedObj)
     {
 
     }

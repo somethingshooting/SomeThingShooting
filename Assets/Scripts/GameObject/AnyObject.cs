@@ -38,11 +38,17 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
     protected Subject<AnyObject> _Sub_OnDied = new Subject<AnyObject>();
     public IObservable<AnyObject> Sub_OnDied => _Sub_OnDied;
 
+    /// <summary>
+    /// 時間の流れの速さ
+    /// </summary>
+    protected float _TimeVelocity = 1;
+    protected float _Timedelta => _TimeVelocity * Time.deltaTime;
+
     // ----- 関数 ----- //
     protected virtual void Start()
     {
-        Sub_OnKill.Subscribe(_ => OnKill());
-        Sub_OnDied.Subscribe(_ => OnDied());
+        Sub_OnKill.Subscribe(killedObj => OnKill(killedObj)).AddTo(gameObject);
+        Sub_OnDied.Subscribe(_ => OnDied()).AddTo(gameObject);
         Init();
     }
 
@@ -64,6 +70,6 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
         }
     }
 
-    protected abstract void OnKill();
+    protected abstract void OnKill(AnyObject killedObj);
     protected abstract void OnDied();
 }
