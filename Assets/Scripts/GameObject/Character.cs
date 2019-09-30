@@ -15,10 +15,10 @@ public abstract class Character : AnyObject
     public IReadOnlyReactiveProperty<float> MoveSpeed => _MoveSpeed;
     protected ReactiveProperty<BuffData> _BuffData = new ReactiveProperty<BuffData>();
     public IReadOnlyReactiveProperty<BuffData> BuffData => _BuffData;
-    protected ReactiveProperty<string> _RunningSkill = new ReactiveProperty<string>();
-    public IReadOnlyReactiveProperty<string> RunningSkill => _RunningSkill;
+    protected ReactiveProperty<string> _RunningAction = new ReactiveProperty<string>();
+    public IReadOnlyReactiveProperty<string> RunningAction => _RunningAction;
 
-    public Dictionary<string, SkillBase> RunableSkills = new Dictionary<string, SkillBase>();
+    public Dictionary<string, ActionBase> RunableActions = new Dictionary<string, ActionBase>();
 
     // ----- 関数 ----- //
     protected override void Start()
@@ -30,12 +30,12 @@ public abstract class Character : AnyObject
     /// <summary>
     /// スキルを実行する
     /// </summary>
-    /// <param name="runSkillName">実行するスキルの名前</param>
-    public void PlaySkill(string runSkillName)
+    /// <param name="runActionName">実行するスキルの名前</param>
+    public void PlayAction(string runActionName)
     {
-        if (RunableSkills[runSkillName].CanCancel)
+        if (RunableActions[runActionName].CanCancel)
         {
-            _RunningSkill.Value = RunableSkills[runSkillName].SkillName;
+            _RunningAction.Value = RunableActions[runActionName].ActionName;
         }
     }
 }
