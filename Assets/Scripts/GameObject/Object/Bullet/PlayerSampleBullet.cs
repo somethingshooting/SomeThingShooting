@@ -38,6 +38,9 @@ public class PlayerSampleBullet : BulletBase
         EnemyBase enemy = obj as EnemyBase;
         if (enemy != null)
         {
+            obj.Sub_HadDamageHit
+                .Take(1)
+                .Subscribe(_ => _Sub_SendDamageHit.OnNext(obj));
             enemy.ApplyDamage(this);
         }
     }
@@ -50,5 +53,10 @@ public class PlayerSampleBullet : BulletBase
     protected override void OnDied()
     {
         Destroy(gameObject);
+    }
+
+    protected override void HadHitDamage(AnyObject obj)
+    {
+
     }
 }

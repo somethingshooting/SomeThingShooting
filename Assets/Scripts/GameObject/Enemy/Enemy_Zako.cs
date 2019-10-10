@@ -30,4 +30,9 @@ public class Enemy_Zako : EnemyBase
     {
 
     }
+
+    protected override void HadHitDamage(AnyObject obj)
+    {
+
+    }
 }

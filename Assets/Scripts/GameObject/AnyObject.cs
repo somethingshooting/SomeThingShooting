@@ -70,6 +70,29 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
         }
     }
 
+    /// <summary>
+    /// 攻撃の成功判定とそれに伴う処理の実行
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool RequestForConfirmationOfAttackDetermination(AnyObject obj)
+    {
+        //基本はTrue(攻撃成功)が返る
+        if (Damageable.Value)
+        {
+            HadHitDamage(obj);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// ダメージを受けた時の処理
+    /// </summary>
+    protected abstract void HadHitDamage(AnyObject obj);
+
     protected abstract void OnKill(AnyObject killedObj);
     protected abstract void OnDied();
 }

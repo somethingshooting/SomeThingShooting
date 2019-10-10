@@ -34,4 +34,9 @@ public class PlayerCore : Character
     {
 
     }
+
+    protected override void HadHitDamage(AnyObject obj)
+    {
+
+    }
 }
