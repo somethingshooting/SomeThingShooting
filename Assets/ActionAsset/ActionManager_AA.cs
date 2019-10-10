@@ -12,7 +12,9 @@ public class ActionManager_AA : MonoBehaviour {
     [SerializeField]
     private Animator _Animator;
 
+
     public int Lever { get; private set ; }
+    public int Button { get; private set; }
     public int Command { get; private set; }
     public int Frame { get; private set; }
     public float Hight { get; private set; }
@@ -24,7 +26,14 @@ public class ActionManager_AA : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        _Animator = GetComponentInChildren<Animator>();
+        if (GetComponent<Animator>() != null)
+        {
+            _Animator = GetComponent<Animator>();
+        }
+        else
+        {
+            _Animator = GetComponentInChildren<Animator>();
+        }
         if (_UseCommandSystem)
         {
             StartReadingCommand();
@@ -35,12 +44,55 @@ public class ActionManager_AA : MonoBehaviour {
     {
         if (!_UseCommandSystem)
         {
-            int _X, _Y;
-            _X = (int)Input.GetAxisRaw("Horizontal");
-            _Y = (int)Input.GetAxisRaw("Vertical");
+            int vertical = 4, horizontal = 2;
+            if (Input.GetKey(Up))
+            {
+                vertical = 7;
+            }
+            else if (Input.GetKey(Down))
+            {
+                vertical = 1;
+            }
+            if (Input.GetKey(Right))
+            {
+                if (Input.GetKey(Left))
+                {
+                }
+                else
+                {
+                    horizontal = 3;
+                }
+            }
+            else
+            {
+                if (Input.GetKey(Left))
+                {
+                    horizontal = 1;
+                }
+            }
 
-            Lever = 5 + _X + _Y * 3;
+            Lever = vertical + horizontal - 1;
+            int button = 0;
+            //fire
+            if (Input.GetKey(Abutton))
+            {
+                button = 1;
+            }
+            if (Input.GetKey(Bbutton))
+            {
+                button = 2;
+            }
+            if (Input.GetKey(Cbutton))
+            {
+                button = 3;
+            }
+            if (Input.GetKey(Dbutton))
+            {
+                button = 4;
+            }
+            Button = button;
         }
+
     }
 
     // Update is called once per frame
@@ -53,6 +105,7 @@ public class ActionManager_AA : MonoBehaviour {
         if (!_UseCommandSystem)
         {
             _Animator.SetInteger("lever", Lever);
+            _Animator.SetInteger("button", Button);
         }
         _Animator.SetFloat("Xspeed", Speed.x);
         _Animator.SetFloat("Yspeed", Speed.y);
@@ -98,8 +151,9 @@ public class ActionManager_AA : MonoBehaviour {
                 getBaseAttack();
 
                 _Animator.SetInteger("lever", Lever);
+                _Animator.SetInteger("button", Button);
                 _Animator.SetInteger("command", GetCommand());
-                Debug.Log(GetCommand());
+              //  Debug.Log(GetCommand());
             }
             else
             {
@@ -168,23 +222,29 @@ public class ActionManager_AA : MonoBehaviour {
         {
             inputCommands += "D";
         }
+        int button = 0;
         //fire
         if (Input.GetKey(Abutton))
         {
             inputCommands += "a";
+            button = 1;
         }
         if (Input.GetKey(Bbutton))
         {
             inputCommands += "b";
+            button = 2;
         }
         if (Input.GetKey(Cbutton))
         {
             inputCommands += "c";
+            button = 3;
         }
         if (Input.GetKey(Dbutton))
         {
             inputCommands += "d";
+            button = 4;
         }
+        Button = button;
 
         if (inputCommands.Length > recCommandLength)
         {
