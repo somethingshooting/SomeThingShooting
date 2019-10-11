@@ -7,10 +7,11 @@ using UniRx;
 public abstract class Character : AnyObject
 {
     // ----- 変数 ----- //
-    protected ReactiveProperty<int> _NowHealth = new ReactiveProperty<int>();
+    [SerializeField]
+    protected IntReactiveProperty _NowHealth = new IntReactiveProperty();
     public IReadOnlyReactiveProperty<int> NowHealth => _NowHealth;
-    protected ReactiveProperty<int> _MaxHealth = new ReactiveProperty<int>();
-    public IReadOnlyReactiveProperty<int> MaxHealth => _MaxHealth;
+    [SerializeField]
+    public CharacterParameter MaxHealth { get; protected set; } = new CharacterParameter();
     protected ReactiveProperty<BuffData> _BuffData = new ReactiveProperty<BuffData>();
     public IReadOnlyReactiveProperty<BuffData> BuffData => _BuffData;
     protected ReactiveProperty<string> _RunningAction = new ReactiveProperty<string>();

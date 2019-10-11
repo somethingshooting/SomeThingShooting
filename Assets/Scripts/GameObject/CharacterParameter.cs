@@ -2,10 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
+[Serializable]
 public class CharacterParameter
 {
-    public int Value;
+    [SerializeField]
+    private IntReactiveProperty _Value = new IntReactiveProperty();
+    public IReadOnlyReactiveProperty<int> Value => _Value;
 
     public int BaseValue;
 
@@ -14,14 +18,16 @@ public class CharacterParameter
     public void AddList(ParameterEffect effect)
     {
         EffectsList.Add(effect);
+        Calculate();
     }
 
     public void RemoveList(ParameterEffect effect)
     {
         EffectsList.Remove(effect);
+        Calculate();
     }
 
-    public void Calculate()
+    private void Calculate()
     {
         var c = new Comparison<ParameterEffect>(Compare);
         EffectsList.Sort();
@@ -31,13 +37,13 @@ public class CharacterParameter
             switch (item.ParameterEffectType)
             {
                 case ParameterEffectType.Add:
-                    Value += item.Value;
+                    _Value.Value += item.Value;
                     break;
                 case ParameterEffectType.Muiltple:
-                    Value += Mathf.RoundToInt(BaseValue * item.Value * 0.01f);
+                    _Value.Value += Mathf.RoundToInt(BaseValue * item.Value * 0.01f);
                     break;
                 case ParameterEffectType.HightMultple:
-                    Value = Mathf.RoundToInt(Value * item.Value * 0.01f);
+                    _Value.Value = Mathf.RoundToInt(Value.Value * item.Value * 0.01f);
                     break;
                 default:
                     Debug.Log("ParameterEffectTypeに指定されていない値です");
@@ -52,11 +58,13 @@ public class CharacterParameter
     }
 }
 
+[Serializable]
 public class ParameterEffect
 {
     //乗算の場合は%ですので, 100で1.00 となります
     public int Value = 0;
     public ParameterEffectType ParameterEffectType;
+    //小さいものから計算される
     public int Order = 0;
     public object Source;
 
