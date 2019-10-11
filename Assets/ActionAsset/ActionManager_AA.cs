@@ -90,6 +90,10 @@ public class ActionManager_AA : MonoBehaviour {
             {
                 button = 4;
             }
+            if (Input.GetKey(Ebutton))
+            {
+                button = 5;
+            }
             Button = button;
         }
 
@@ -131,7 +135,7 @@ public class ActionManager_AA : MonoBehaviour {
 
     [SerializeField]
     public string Up, Down, Left, Right;
-    public string Abutton, Bbutton, Cbutton, Dbutton;
+    public string Abutton, Bbutton, Cbutton, Dbutton, Ebutton;
     // Use this for initialization
     private void StartReadingCommand()
     {
@@ -222,6 +226,10 @@ public class ActionManager_AA : MonoBehaviour {
         {
             inputCommands += "D";
         }
+        if (Input.GetKeyDown(Ebutton)||Input.GetKeyUp(Ebutton))
+        {
+            inputCommands += "E";
+        }
         int button = 0;
         //fire
         if (Input.GetKey(Abutton))
@@ -243,6 +251,11 @@ public class ActionManager_AA : MonoBehaviour {
         {
             inputCommands += "d";
             button = 4;
+        }
+        if (Input.GetKey(Ebutton))
+        {
+            inputCommands += "e";
+            button = 5;
         }
         Button = button;
 

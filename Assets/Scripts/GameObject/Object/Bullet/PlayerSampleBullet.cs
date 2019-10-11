@@ -3,51 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using UniRx.Triggers;
 
 /// <summary>
 /// プレイヤーのサンプル弾(直線に飛ぶだけ)
 /// </summary>
 public class PlayerSampleBullet : BulletBase
 {
-    [SerializeField]
-    private float _MoveSpeed = 1;
+    private PlayerCore _Core;
 
     protected override void Init()
     {
-        Observable.EveryUpdate()
+        if (Affiliation != null)
+        {
+            GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
+        }
+        else
+        {
+            Affiliation.GetComponent<PlayerCore>();
+        }
+
+        this.UpdateAsObservable()
             .Subscribe(_ => Move());
+
         Sub_SendPhysicsHit
             .Subscribe(obj => SendHitObj(obj));
+
     }
 
-    private void Move()
+    protected override void Move()
     {
         transform.Translate(transform.forward * _Timedelta * _MoveSpeed);
     }
 
-    protected void SendHitObj(AnyObject obj)
-    {
-        if (CurrentAtackData != null)
-        {
-            SendDamage(obj);
-        }
-    }
-
-    private void SendDamage(AnyObject obj)
-    {
-        EnemyBase enemy = obj as EnemyBase;
-        if (enemy != null)
-        {
-            obj.Sub_HadDamageHit
-                .Take(1)
-                .Subscribe(_ => _Sub_SendDamageHit.OnNext(obj));
-            enemy.ApplyDamage(this);
-        }
-    }
-
     protected override void OnKill(AnyObject killedObj)
     {
-
+        _Core.NotifyDestruction(killedObj);
     }
 
     protected override void OnDied()
@@ -57,6 +48,6 @@ public class PlayerSampleBullet : BulletBase
 
     protected override void HadHitDamage(AnyObject obj)
     {
-
+        _Sub_OnDied.OnNext(obj);
     }
 }

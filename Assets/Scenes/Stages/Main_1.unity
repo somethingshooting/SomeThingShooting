@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1042,6 +1042,7 @@ GameObject:
   - component: {fileID: 1366425209}
   - component: {fileID: 1366425212}
   - component: {fileID: 1366425208}
+  - component: {fileID: 1366425210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1076,6 +1077,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _NowHealth:
     value: 0
+--- !u!114 &1366425210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366425207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72eede192787c33499898033b259fedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1366425211
 Transform:
   m_ObjectHideFlags: 0
@@ -1113,10 +1126,11 @@ MonoBehaviour:
   Down: s
   Left: a
   Right: d
-  Abutton: q
-  Bbutton: e
-  Cbutton: z
-  Dbutton: v
+  Abutton: 1
+  Bbutton: 2
+  Cbutton: 3
+  Dbutton: 4
+  Ebutton: 5
   _Commands: []
 --- !u!1001 &1382798661
 PrefabInstance:

@@ -79,6 +79,7 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
         //基本はTrue(攻撃成功)が返る
         if (Damageable.Value)
         {
+            _Sub_HadDamageHit.OnNext(obj);
             HadHitDamage(obj);
             return true;
         }
@@ -86,6 +87,11 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
         {
             return false;
         }
+    }
+    /// <summary>敵のKillを通知する</summary>
+    public void NotifyDestruction(AnyObject obj)
+    {
+        _Sub_OnKill.OnNext(obj);
     }
 
     /// <summary>
@@ -95,4 +101,18 @@ public abstract class AnyObject : MonoBehaviour, IAttackable, IDamageable
 
     protected abstract void OnKill(AnyObject killedObj);
     protected abstract void OnDied();
+
+    /// <summary>TeamTypeが中立または自分と異なる場合は真を返し、それ以外なら偽を返す</summary>
+    protected bool IsHittableTeam(AnyObject obj)
+    {
+        if (obj.TeamType == TeamType.Neutral)
+        {
+            return true;
+        }
+        else if (obj.TeamType != TeamType)
+        {
+            return true;
+        }
+        return false;
+    }
 }

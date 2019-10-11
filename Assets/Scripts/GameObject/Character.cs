@@ -42,7 +42,7 @@ public abstract class Character : AnyObject
         }
     }
 
-    public void ApplyDamage(AnyObject obj)
+    protected void ApplyDamage(AnyObject obj)
     {
         _NowHealth.Value -= obj.CurrentAtackData.DamageValue;
         _Sub_HadDamageHit.OnNext(obj);
