@@ -10,12 +10,6 @@ public class Enemy_Zako : EnemyBase
     // ----- Subject ----- //
 
     // ----- 関数 ----- //
-    protected override void Start()
-    {
-        base.Start();
-
-    }
-
     protected override void Init()
     {
 

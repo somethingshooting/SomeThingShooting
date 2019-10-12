@@ -316,5 +316,4 @@ public class ActionManager_AA : MonoBehaviour {
         [SerializeField]
         public int _Priority;// { get; private set; }
     }
-
 }

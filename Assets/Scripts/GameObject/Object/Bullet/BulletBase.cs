@@ -9,8 +9,7 @@ public abstract class BulletBase : AnyObject
     [SerializeField]
     protected float _MoveSpeed = 1;
 
-    [System.NonSerialized]
-    public Transform Affiliation = null;
+    protected Transform Affiliation = null;
 
     protected override void Init()
     {

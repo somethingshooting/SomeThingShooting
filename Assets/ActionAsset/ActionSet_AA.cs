@@ -29,6 +29,5 @@ public class ActionSet_AA : MonoBehaviour {
 
             }
         }
-  
     }
 }

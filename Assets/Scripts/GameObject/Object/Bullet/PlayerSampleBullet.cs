@@ -14,14 +14,8 @@ public class PlayerSampleBullet : BulletBase
 
     protected override void Init()
     {
-        if (Affiliation != null)
-        {
-            GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
-        }
-        else
-        {
-            Affiliation.GetComponent<PlayerCore>();
-        }
+
+        _Core = GameObject.FindWithTag("Player").GetComponent<PlayerCore>();
 
         this.UpdateAsObservable()
             .Subscribe(_ => Move());
@@ -29,11 +23,15 @@ public class PlayerSampleBullet : BulletBase
         Sub_SendPhysicsHit
             .Subscribe(obj => SendHitObj(obj));
 
+        this.UpdateAsObservable()
+            .Where(_ => Vector3.Distance(Vector3.zero, transform.position) > 15)
+            .Subscribe(_ => _Sub_OnDied.OnNext(this));
+
     }
 
     protected override void Move()
     {
-        transform.Translate(transform.forward * _Timedelta * _MoveSpeed);
+        transform.Translate(Vector3.forward * _Timedelta * _MoveSpeed);
     }
 
     protected override void OnKill(AnyObject killedObj)
